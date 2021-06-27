@@ -13,6 +13,9 @@ class Laporan extends StatefulWidget {
 class _LaporanState extends State<Laporan> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double titleFont = size.width * 0.0364;
+    double keteranganFont = size.width * 0.0437;
     return Scaffold(
       body: FutureBuilder(
         future: Hive.openBox("catatan"),
@@ -21,16 +24,45 @@ class _LaporanState extends State<Laporan> {
             if (snapshot.hasError) {
               return Center(child: Text((snapshot.error).toString()));
             } else {
-              var catatan = Hive.box("catatan");
-              if (catatan.length == 0) {
-                catatan.add(Catatan(10000, "Modal", "12 Januari 2021"));
+              var catatanBox = Hive.box("catatan");
+              if (catatanBox.length == 1) {
+                catatanBox.add(Catatan(10000, "Beli Mobil", "12 Januari 2021"));
               }
-              return ListView.builder(
-                  itemCount: catatan.length,
-                  itemBuilder: (context, index) {
-                    Catatan catatan_single = catatan.getAt(index);
-                    return Text(catatan_single.keterangan);
-                  });
+              return SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                      itemCount: catatanBox.length,
+                      itemBuilder: (context, index) {
+                        Catatan catatan = catatanBox.getAt(index);
+                        return Card(
+                            elevation: 10,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Text(
+                                    catatan.waktu,
+                                    style: TextStyle(fontSize: titleFont),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    catatan.keterangan,
+                                    style: TextStyle(fontSize: keteranganFont),
+                                  ),
+                                  Text(
+                                    catatan.nominal.toString(),
+                                    style: TextStyle(fontSize: keteranganFont),
+                                  )
+                                ],
+                              ),
+                            ));
+                      }),
+                ),
+              );
             }
           } else {
             return Center(child: CircularProgressIndicator());
@@ -40,10 +72,10 @@ class _LaporanState extends State<Laporan> {
     );
   }
 }
-// class Laporan extends StatefulWidget {
-//   @override
-//   _LaporanState createState() => _LaporanState();
-// }
+// // class Laporan extends StatefulWidget {
+// //   @override
+// //   _LaporanState createState() => _LaporanState();
+// // }
 
 // class _LaporanState extends State<Laporan> {
 //   @override
@@ -87,6 +119,30 @@ class _LaporanState extends State<Laporan> {
 //             ),
 //             SizedBox(
 //               height: 20,
+//             ),
+//             FutureBuilder(
+//               future: Hive.openBox("catatan"),
+//               builder: (context, snapshot) {
+//                 if (snapshot.connectionState == ConnectionState.done) {
+//                   if (snapshot.hasError) {
+//                     return Center(child: Text((snapshot.error).toString()));
+//                   } else {
+//                     var catatanBox = Hive.box("catatan");
+//                     if (catatanBox.length == 0) {
+//                       catatanBox
+//                           .add(Catatan(10000, "Modal", "12 Januari 2021"));
+//                     }
+//                     return ListView.builder(
+//                         itemCount: catatanBox.length,
+//                         itemBuilder: (context, index) {
+//                           Catatan catatan = catatanBox.getAt(index);
+//                           return Text(catatan.keterangan);
+//                         });
+//                   }
+//                 } else {
+//                   return Center(child: CircularProgressIndicator());
+//                 }
+//               },
 //             ),
 //             Row(
 //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
