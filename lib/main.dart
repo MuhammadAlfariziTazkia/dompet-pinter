@@ -1,3 +1,4 @@
+import 'package:dompet_pinter/model/catatan.dart';
 import 'package:flutter/material.dart';
 import 'catatpemasukan.dart';
 import 'catatpengeluaran.dart';
@@ -6,8 +7,15 @@ import 'wishlist.dart';
 import 'hutangsaya.dart';
 import 'hutangorang.dart';
 import 'laporan.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:hive/hive.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var appDocumentDirectory =
+      await pathProvider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
+  Hive.registerAdapter(CatatanAdapter());
   runApp(MyApp());
 }
 
