@@ -20,19 +20,22 @@ class CatatanAdapter extends TypeAdapter<Catatan> {
       fields[0] as String,
       fields[1] as String,
       fields[2] as int,
+      fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Catatan obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.waktu)
       ..writeByte(1)
       ..write(obj.keterangan)
       ..writeByte(2)
-      ..write(obj.nominal);
+      ..write(obj.nominal)
+      ..writeByte(3)
+      ..write(obj.tipe);
   }
 
   @override
