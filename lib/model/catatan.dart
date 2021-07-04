@@ -9,6 +9,8 @@ class Catatan {
   String keterangan;
   @HiveField(2)
   int nominal;
+  @HiveField(3)
+  String tipe;
 
-  Catatan(this.waktu, this.keterangan, this.nominal);
+  Catatan(this.waktu, this.keterangan, this.nominal, this.tipe);
 }
