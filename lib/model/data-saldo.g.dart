@@ -1,38 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'catatan.dart';
+part of 'data-saldo.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CatatanAdapter extends TypeAdapter<Catatan> {
+class DataSaldoAdapter extends TypeAdapter<DataSaldo> {
   @override
-  final int typeId = 0;
+  final int typeId = 3;
 
   @override
-  Catatan read(BinaryReader reader) {
+  DataSaldo read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Catatan(
-      fields[0] as String,
-      fields[1] as String,
-      fields[2] as int,
+    return DataSaldo(
+      fields[0] as int,
+      fields[1] as int,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Catatan obj) {
+  void write(BinaryWriter writer, DataSaldo obj) {
     writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.waktu)
-      ..writeByte(1)
-      ..write(obj.keterangan)
       ..writeByte(2)
-      ..write(obj.nominal);
+      ..writeByte(0)
+      ..write(obj.saldoDompet)
+      ..writeByte(1)
+      ..write(obj.saldoCalengan);
   }
 
   @override
@@ -41,7 +38,7 @@ class CatatanAdapter extends TypeAdapter<Catatan> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CatatanAdapter &&
+      other is DataSaldoAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

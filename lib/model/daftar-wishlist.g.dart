@@ -1,38 +1,44 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'catatan.dart';
+part of 'daftar-wishlist.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CatatanAdapter extends TypeAdapter<Catatan> {
+class DaftarWishlistAdapter extends TypeAdapter<DaftarWishlist> {
   @override
-  final int typeId = 0;
+  final int typeId = 2;
 
   @override
-  Catatan read(BinaryReader reader) {
+  DaftarWishlist read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Catatan(
+    return DaftarWishlist(
       fields[0] as String,
-      fields[1] as String,
-      fields[2] as int,
+      fields[1] as int,
+      fields[2] as String,
+      fields[3] as String,
+      fields[4] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Catatan obj) {
+  void write(BinaryWriter writer, DaftarWishlist obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(5)
       ..writeByte(0)
-      ..write(obj.waktu)
+      ..write(obj.namaBarang)
       ..writeByte(1)
-      ..write(obj.keterangan)
+      ..write(obj.harga)
       ..writeByte(2)
-      ..write(obj.nominal);
+      ..write(obj.waktuBeli)
+      ..writeByte(3)
+      ..write(obj.keperluan)
+      ..writeByte(4)
+      ..write(obj.link);
   }
 
   @override
@@ -41,7 +47,7 @@ class CatatanAdapter extends TypeAdapter<Catatan> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CatatanAdapter &&
+      other is DaftarWishlistAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

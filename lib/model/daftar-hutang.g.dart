@@ -1,38 +1,47 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'catatan.dart';
+part of 'daftar-hutang.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CatatanAdapter extends TypeAdapter<Catatan> {
+class DaftarHutangAdapter extends TypeAdapter<DaftarHutang> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
-  Catatan read(BinaryReader reader) {
+  DaftarHutang read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Catatan(
+    return DaftarHutang(
       fields[0] as String,
       fields[1] as String,
-      fields[2] as int,
+      fields[2] as String,
+      fields[3] as int,
+      fields[4] as String,
+      fields[5] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Catatan obj) {
+  void write(BinaryWriter writer, DaftarHutang obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.waktu)
+      ..write(obj.penghutang)
       ..writeByte(1)
-      ..write(obj.keterangan)
+      ..write(obj.tanggal)
       ..writeByte(2)
-      ..write(obj.nominal);
+      ..write(obj.dihutang)
+      ..writeByte(3)
+      ..write(obj.nominal)
+      ..writeByte(4)
+      ..write(obj.keperluan)
+      ..writeByte(5)
+      ..write(obj.waktuLunas);
   }
 
   @override
@@ -41,7 +50,7 @@ class CatatanAdapter extends TypeAdapter<Catatan> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CatatanAdapter &&
+      other is DaftarHutangAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
