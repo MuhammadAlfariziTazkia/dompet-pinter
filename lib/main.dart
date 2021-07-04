@@ -1,4 +1,7 @@
 import 'package:dompet_pinter/model/catatan.dart';
+import 'package:dompet_pinter/model/daftar-hutang.dart';
+import 'package:dompet_pinter/model/daftar-wishlist.dart';
+import 'package:dompet_pinter/model/data-saldo.dart';
 import 'package:flutter/material.dart';
 import 'catatpemasukan.dart';
 import 'catatpengeluaran.dart';
@@ -16,6 +19,9 @@ void main() async {
       await pathProvider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   Hive.registerAdapter(CatatanAdapter());
+  Hive.registerAdapter(DataSaldoAdapter());
+  Hive.registerAdapter(DaftarHutangAdapter());
+  Hive.registerAdapter(DaftarWishlistAdapter());
   runApp(MyApp());
 }
 
