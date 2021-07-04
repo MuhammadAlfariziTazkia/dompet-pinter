@@ -18,16 +18,16 @@ class _LaporanState extends State<Laporan> {
     double keteranganFont = size.width * 0.0437;
     return Scaffold(
       body: FutureBuilder(
-        future: Hive.openBox("catatana"),
+        future: Hive.openBox("catatan"),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
               return Center(child: Text((snapshot.error).toString()));
             } else {
-              var catatanBox = Hive.box("catatana");
-              if (catatanBox.length == 1) {
-                catatanBox.add(Catatan(10000, "Beli Mobil", "12 Januari 2021"));
-              }
+              var catatanBox = Hive.box("catatan");
+              // if (catatanBox.length == 1) {
+              //   catatanBox.add(Catatan("12 Januari 2021", "Beli Mobil", 10000));
+              // }
               return SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
