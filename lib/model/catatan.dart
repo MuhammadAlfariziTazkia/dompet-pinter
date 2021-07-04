@@ -4,11 +4,11 @@ part 'catatan.g.dart';
 @HiveType(typeId: 0)
 class Catatan {
   @HiveField(0)
-  int nominal;
+  String waktu;
   @HiveField(1)
   String keterangan;
   @HiveField(2)
-  String waktu;
+  int nominal;
 
-  Catatan(this.nominal, this.keterangan, this.waktu);
+  Catatan(this.waktu, this.keterangan, this.nominal);
 }
