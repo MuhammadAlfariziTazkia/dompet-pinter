@@ -71,6 +71,13 @@ class _LaporanState extends State<Laporan> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    Hive.close();
+    super.dispose();
+  }
 }
 // // class Laporan extends StatefulWidget {
 // //   @override

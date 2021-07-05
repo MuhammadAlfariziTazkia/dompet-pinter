@@ -29,7 +29,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
+  @override
+  _DashboardState createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -377,5 +382,12 @@ class Dashboard extends StatelessWidget {
 
   TextStyle fitur(double size) {
     return TextStyle(fontSize: size);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    Hive.close();
+    super.dispose();
   }
 }

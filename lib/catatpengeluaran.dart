@@ -1,3 +1,5 @@
+import 'package:dompet_pinter/database-conf.dart';
+import 'package:dompet_pinter/model/catatan.dart';
 import 'package:flutter/material.dart';
 
 class CatatPengeluaran extends StatefulWidget {
@@ -9,6 +11,7 @@ class _CatatPengeluaranState extends State<CatatPengeluaran> {
   TextEditingController tanggal = TextEditingController();
   TextEditingController keterangan = TextEditingController();
   TextEditingController nominal = TextEditingController();
+  DatabaseConfig db = DatabaseConfig();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -180,6 +183,8 @@ class _CatatPengeluaranState extends State<CatatPengeluaran> {
                 showDialog(
                     context: context,
                     builder: (context) {
+                      db.addCatatan(Catatan(tanggal.text, keterangan.text,
+                          int.parse(nominal.text), "pengeluaran"));
                       return AlertDialog(
                         content: Container(
                             width: size.width,
