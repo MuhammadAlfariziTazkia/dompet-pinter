@@ -5,7 +5,6 @@ class DatabaseConfig {
   void addCatatan(Catatan catatan) async {
     var box = await Hive.openBox<Catatan>("catatan");
     box.add(catatan);
-    box.close();
   }
 
   void getLastestPengeluaran() async {
@@ -13,6 +12,5 @@ class DatabaseConfig {
     final box = await Hive.openBox("catatan");
 
     _catatan = box.values.toList();
-    box.close();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:dompet_pinter/database-conf.dart';
 import 'package:dompet_pinter/model/catatan.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class CatatPengeluaran extends StatefulWidget {
   @override
@@ -211,6 +212,7 @@ class _CatatPengeluaranState extends State<CatatPengeluaran> {
     tanggal.dispose();
     keterangan.dispose();
     nominal.dispose();
+    Hive.close();
     super.dispose();
   }
 }
