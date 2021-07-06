@@ -1,5 +1,6 @@
 import 'package:dompet_pinter/model/catatan.dart';
 import 'package:dompet_pinter/model/daftar-hutang.dart';
+import 'package:dompet_pinter/model/daftar-wishlist.dart';
 import 'package:hive/hive.dart';
 
 class DatabaseConfig {
@@ -18,5 +19,10 @@ class DatabaseConfig {
   void addHutang(DaftarHutang hutang) async {
     var box = await Hive.box("hutang");
     box.add(hutang);
+  }
+
+  void addWishlist(DaftarWishlist wishlist) async {
+    var box = await Hive.box("wishlist");
+    box.add(wishlist);
   }
 }
