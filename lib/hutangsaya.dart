@@ -1,7 +1,13 @@
+import 'package:dompet_pinter/database-conf.dart';
 import 'package:flutter/material.dart';
 import 'tambahhutangsaya.dart';
 
-class HutangSaya extends StatelessWidget {
+class HutangSaya extends StatefulWidget {
+  @override
+  _HutangSayaState createState() => _HutangSayaState();
+}
+
+class _HutangSayaState extends State<HutangSaya> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -88,7 +94,7 @@ class HutangSaya extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                'Nama yang Ngutang',
+                                'Nama yang Dihutangin',
                                 style: TextStyle(
                                     fontSize: keteranganFont,
                                     fontWeight: FontWeight.bold),

@@ -1,4 +1,7 @@
+import 'package:dompet_pinter/database-conf.dart';
+import 'package:dompet_pinter/model/daftar-hutang.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class TambahHutangSaya extends StatefulWidget {
   @override
@@ -11,6 +14,7 @@ class _TambahHutangSayaState extends State<TambahHutangSaya> {
   TextEditingController nominal = TextEditingController();
   TextEditingController keperluan = TextEditingController();
   TextEditingController tanggal_balikin = TextEditingController();
+  DatabaseConfig db = DatabaseConfig();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -146,7 +150,15 @@ class _TambahHutangSayaState extends State<TambahHutangSaya> {
               elevation: 10,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
-              onPressed: () {},
+              onPressed: () {
+                db.addHutang(DaftarHutang(
+                    "saya",
+                    tanggal_ngutang.text,
+                    nama.text,
+                    int.parse(nominal.text),
+                    keperluan.text,
+                    tanggal_balikin.text));
+              },
               color: Color(0xffF83C3C),
               padding: EdgeInsets.only(top: 8, bottom: 8, left: 20, right: 20),
               child: Text(
@@ -171,6 +183,7 @@ class _TambahHutangSayaState extends State<TambahHutangSaya> {
     nominal.dispose();
     keperluan.dispose();
     tanggal_balikin.dispose();
+    Hive.close();
     super.dispose();
   }
 }
