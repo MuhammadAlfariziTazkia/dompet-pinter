@@ -26,7 +26,7 @@ class _TambahHutangOrangState extends State<TambahHutangOrang> {
     double fieldHeight = size.height * 0.115;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tambah Hutang Saya'),
+        title: Text('Tambah Hutang Orang'),
       ),
       body: SingleChildScrollView(
         child: Column(
