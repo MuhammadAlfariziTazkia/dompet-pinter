@@ -1,3 +1,5 @@
+import 'package:dompet_pinter/database-conf.dart';
+import 'package:dompet_pinter/model/daftar-wishlist.dart';
 import 'package:flutter/material.dart';
 
 class TambahWishlist extends StatefulWidget {
@@ -11,7 +13,7 @@ class _TambahWishlistState extends State<TambahWishlist> {
   TextEditingController tanggal = TextEditingController();
   TextEditingController keperluan = TextEditingController();
   TextEditingController link = TextEditingController();
-
+  DatabaseConfig db = DatabaseConfig();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -149,7 +151,10 @@ class _TambahWishlistState extends State<TambahWishlist> {
               elevation: 10,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
-              onPressed: () {},
+              onPressed: () {
+                db.addWishlist(DaftarWishlist(nama.text, int.parse(harga.text),
+                    tanggal.text, keperluan.text, link.text));
+              },
               color: Color(0xffF83C3C),
               padding: EdgeInsets.only(top: 8, bottom: 8, left: 20, right: 20),
               child: Text(
