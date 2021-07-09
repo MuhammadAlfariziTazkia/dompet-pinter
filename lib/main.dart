@@ -1,3 +1,4 @@
+import 'package:dompet_pinter/database-helper.dart';
 import 'package:dompet_pinter/model/data.dart';
 import 'package:dompet_pinter/model/hutang.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'model/wishlist-db.dart';
 import 'model/transaksi.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   var appDocumentDirectory =
       await pathProvider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
@@ -21,10 +23,6 @@ void main() async {
   Hive.registerAdapter(WishlistDBAdapter());
   Hive.registerAdapter(TransaksiAdapter());
   Hive.registerAdapter(DataAdapter());
-  await Hive.openBox("hutang");
-  await Hive.openBox("wishlist");
-  await Hive.openBox("transaksi");
-  await Hive.openBox("data");
   runApp(MyApp());
 }
 
@@ -48,62 +46,72 @@ class Dashboard extends StatelessWidget {
     double cardElevation = 7;
     double imageSize = size.width * 0.267;
     double iconSize = size.width * 0.12;
+    DatabaseHelper db = DatabaseHelper();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(50),
-                        bottomRight: Radius.circular(50)),
-                    gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [Color(0xff000000), Color(0xff2BB3FF)])),
-                child: Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'Halo',
-                          style: TextStyle(
-                              fontSize: size.width * 0.0608,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'Muhammad Alfarizi T',
-                          style: TextStyle(
-                              fontSize: size.width * 0.053,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text('isi Dompet',
-                        style: TextStyle(
-                            fontSize: size.width * 0.03, color: Colors.white)),
-                    Text('Rp 25.000.000.00,-',
-                        style: TextStyle(
-                            fontSize: size.width * 0.043,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700)),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                ),
-              ),
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(50),
+                          bottomRight: Radius.circular(50)),
+                      gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [Color(0xff000000), Color(0xff2BB3FF)])),
+                  child: FutureBuilder<Map>(
+                      future: db.showData(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          Map? data = snapshot.data;
+                          return Column(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    'Halo',
+                                    style: TextStyle(
+                                        fontSize: size.width * 0.0608,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    data!["username"].toString(),
+                                    style: TextStyle(
+                                        fontSize: size.width * 0.053,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text('isi Dompet',
+                                  style: TextStyle(
+                                      fontSize: size.width * 0.03,
+                                      color: Colors.white)),
+                              Text(data["saldo_dompet"].toString(),
+                                  style: TextStyle(
+                                      fontSize: size.width * 0.043,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700)),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          );
+                        } else {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                      })),
               SizedBox(height: boxSize),
               Container(
                 child: Card(
