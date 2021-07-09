@@ -1,4 +1,7 @@
+import 'package:dompet_pinter/model/data.dart';
+import 'package:dompet_pinter/model/hutang.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'catatpemasukan.dart';
 import 'catatpengeluaran.dart';
 import 'calengan.dart';
@@ -6,8 +9,18 @@ import 'wishlist.dart';
 import 'hutangsaya.dart';
 import 'hutangorang.dart';
 import 'laporan.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'model/wishlist-db.dart';
+import 'model/transaksi.dart';
 
-void main() {
+void main() async {
+  var appDocumentDirectory =
+      await pathProvider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
+  Hive.registerAdapter(HutangAdapter());
+  Hive.registerAdapter(WishlistDBAdapter());
+  Hive.registerAdapter(TransaksiAdapter());
+  Hive.registerAdapter(DataAdapter());
   runApp(MyApp());
 }
 
