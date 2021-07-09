@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+part 'wishlist-db.g.dart';
 
 @HiveType(typeId: 2)
 class WishlistDB {
