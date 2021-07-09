@@ -21,6 +21,10 @@ void main() async {
   Hive.registerAdapter(WishlistDBAdapter());
   Hive.registerAdapter(TransaksiAdapter());
   Hive.registerAdapter(DataAdapter());
+  await Hive.openBox("hutang");
+  await Hive.openBox("wishlist");
+  await Hive.openBox("transaksi");
+  await Hive.openBox("data");
   runApp(MyApp());
 }
 
